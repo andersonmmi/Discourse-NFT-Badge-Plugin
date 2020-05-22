@@ -7,7 +7,51 @@ https://meta.discourse.org/t/what-are-badges/32540
 
 https://meta.discourse.org/t/grant-a-badge-to-individual-users-manually/29426
 
-##  Discourse development server setup:
+## Discourse development server setup:
+
+[Beginners guild to install Discourse for Development Using Docker](https://meta.discourse.org/t/beginners-guide-to-install-discourse-for-development-using-docker/102009)
+
+NOTE: Getting the development server running can require a fair amount of fiddling.  Once running it will be accessible via IP on port 9292.
+
+Enable firewall to allow incoming traffic on port 9292.
+
+To download, configure, and launch run:
+
+```
+git clone https://github.com/discourse/discourse.git
+cd discourse
+d/boot_dev --init
+d/shutdown_dev
+d/boot_dev -p
+d/unicorn -x
+```
+
+Sometimes a new container will fail to launch with an error similar to:
+
+```
+Could not find minitest-5.14.1 in any of the sources
+Run `bundle install` to install missing gems.
+```
+To resolve an error like that, run:
+
+```
+d/shell
+cd src
+bundle install
+exit
+d/shutdown_dev
+d/boot_dev -p
+d/unicorn -x
+```
+
+Plugins can be developed/loaded by placing them in the `plugins` directory and then restarting the container with:
+
+```
+d/shutdown_dev
+d/unicorn -x
+```
+
+##  Discourse production-style server setup:
 
 Requires:
 - mailgun.com account
@@ -37,12 +81,14 @@ https://www.digitalocean.com/community/tutorials/how-to-install-discourse-on-ubu
 
 [Lots of example Discourse plugins, for reference](https://github.com/discourse/all-the-plugins/tree/master/plugins)
 
+[Beginners Guide to Creating Discourse Plugins](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-1/30515)
+
 [Plugin Coding Tutorial](https://kleinfreund.de/how-to-create-a-discourse-plugin/)
 NOTE: There seem to be some bugs within the code from this tutorial, use with caution. (The plugin installs successfully, but the /notebook page does not render as expected)
 
 [Guide to installing plugins in Discourse (applies to Production discourse_docker style installs)](https://meta.discourse.org/t/install-plugins-in-discourse/19157/215)
 
-Adding a plugin from a github repository:
+Adding a plugin ("discourse-user-notes" plugin in this example) from a github repository:
 
 Edit `/var/discourse/containers/app.yml`, modify the section titled "Plugins go here" by adding a line at the end to clone the git repository of the desired plugins.  If no other plugins have been installed yet it should look like this. (Note that on some installations the line with "docker_manager.git" may start with "sudo -E -u discourse", leave it as is):
 
