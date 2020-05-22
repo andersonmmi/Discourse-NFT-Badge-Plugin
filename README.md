@@ -83,6 +83,18 @@ https://www.digitalocean.com/community/tutorials/how-to-install-discourse-on-ubu
 
 [Beginners Guide to Creating Discourse Plugins](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-1/30515)
 
+[Plugin Generator](https://meta.discourse.org/t/rails-plugin-generator/95907)
+Running this tool requires opening a shell INTO the Discourse development container and navigating to /src. It was used to generate the skeleton for this plugin by running:
+
+```
+d/shell
+cd /src
+rails g plugin DiscourseNftBadge
+exit
+```
+
+The generated files are saved to `plugins/discourse-nft-badge` 
+
 [Plugin Coding Tutorial](https://kleinfreund.de/how-to-create-a-discourse-plugin/)
 NOTE: There seem to be some bugs within the code from this tutorial, use with caution. (The plugin installs successfully, but the /notebook page does not render as expected)
 
