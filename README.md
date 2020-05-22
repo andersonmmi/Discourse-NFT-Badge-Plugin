@@ -1,11 +1,6 @@
 # Discourse-NFT-Badge-Plugin
 This plugin will unlock badges in discourse based on badges owned by a user's address
 
-[Plugin Coding Tutorial](https://kleinfreund.de/how-to-create-a-discourse-plugin/)
-NOTE: There seem to be some bugs within the code from this tutorial, use with caution. (The plugin installs successfully, but the /notebook page does not render as expected)
-
-
-
 ## Discourse Badge Documentation:
 
 https://meta.discourse.org/t/what-are-badges/32540
@@ -41,6 +36,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-discourse-on-ubu
 ## Developing Discourse plugins:
 
 [Lots of example Discourse plugins, for reference](https://github.com/discourse/all-the-plugins/tree/master/plugins)
+
+[Plugin Coding Tutorial](https://kleinfreund.de/how-to-create-a-discourse-plugin/)
+NOTE: There seem to be some bugs within the code from this tutorial, use with caution. (The plugin installs successfully, but the /notebook page does not render as expected)
 
 [Guide to installing plugins in Discourse (applies to Production discourse_docker style installs)](https://meta.discourse.org/t/install-plugins-in-discourse/19157/215)
 
