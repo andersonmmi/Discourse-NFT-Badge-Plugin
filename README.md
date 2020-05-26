@@ -48,6 +48,7 @@ Plugins can be developed/loaded by placing them in the `plugins` directory and t
 
 ```
 d/shutdown_dev
+rm -rf tmp/cache
 d/unicorn -x
 ```
 
