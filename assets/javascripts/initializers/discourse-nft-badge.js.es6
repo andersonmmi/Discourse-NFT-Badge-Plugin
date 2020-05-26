@@ -5,6 +5,7 @@ function initializeDiscourseNftBadge(api) {
   // https://github.com/discourse/discourse/blob/master/app/assets/javascripts/discourse/app/lib/plugin-api.js
 
   console.log("NFT Badge plugin loaded");
+  console.log("User", api.getCurrentUser());
 }
 
 export default {

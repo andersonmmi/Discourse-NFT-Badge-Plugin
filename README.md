@@ -53,6 +53,8 @@ d/boot_dev -p
 d/unicorn -x
 ```
 
+After restarting the development container, reloading the site can be extremely slow and often fails at least once.
+
 ##  Discourse production-style server setup:
 
 Requires:
