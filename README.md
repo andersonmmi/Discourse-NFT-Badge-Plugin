@@ -44,7 +44,14 @@ d/boot_dev -p
 d/unicorn -x
 ```
 
-Plugins can be developed/loaded by placing them in the `plugins` directory and then restarting the container with:
+Plugins can be developed/loaded by placing them in the `plugins` directory and then restarting the container.  If the unicorn process is running in a current shell, end it with `^c` and then delete the cache and restart the unicorn process:
+
+```
+rm -rf tmp/cache
+d/unicorn -x
+```
+
+If you are not connected to the shell running unicorn, the container can instead be killed and restarted with:
 
 ```
 d/shutdown_dev
@@ -53,7 +60,7 @@ d/boot_dev -p
 d/unicorn -x
 ```
 
-After restarting the development container, reloading the site can be extremely slow and often fails at least once.
+After restarting the development container, reloading the site in a web browser can be extremely slow and often fails at least once, requiring one or more page refreshes.
 
 ##  Discourse production-style server setup:
 
