@@ -6,6 +6,12 @@
 # authors: andersonmmi, morganstar
 # url: https://github.com/andersonmmi/Discourse-NFT-Badge-Plugin
 
+add_admin_route 'purple_tentacle.title', 'purple-tentacle'
+
+Discourse::Application.routes.apend do
+  get 'admin/plugins/purple-tentacle' => 'admin/plugins#index', constraints: StaffConstraint.new
+end
+
 register_asset 'stylesheets/common/discourse-nft-badge.scss'
 register_asset 'stylesheets/desktop/discourse-nft-badge.scss', :desktop
 register_asset 'stylesheets/mobile/discourse-nft-badge.scss', :mobile
