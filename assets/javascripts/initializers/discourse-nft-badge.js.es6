@@ -17,6 +17,8 @@ function initializeDiscourseNftBadge(api) {
   // .username (string)
   // .username_lower (string)
 
+  console.log("aaron's branch has loaded");
+
 }
 
 export default {

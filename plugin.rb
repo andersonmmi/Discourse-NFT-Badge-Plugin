@@ -20,7 +20,6 @@ after_initialize do
   # https://github.com/discourse/discourse/blob/master/lib/plugin/instance.rb
 end
 
-
 # PluginStoreRow, UserCustomField, and UserBadge are all classes which inherit from ActiveRecord
 # https://meta.discourse.org/t/how-to-write-a-ruby-code-that-add-a-new-users-data-to-a-user-custom-fields/66662/4
 #
@@ -67,3 +66,9 @@ end
 #      addressData.push(address2)
 #      userEthereumAddresses.value = addressData.jsonStringify
 #      userEthereumAddresses.save
+
+add_admin_route 'purple_tentacle.title', 'purple-tentacle'
+
+Discourse::Application.routes.append do
+  get 'admin/plugins/purple-tentacle' => 'admin/plugins#index', constraints: StaffConstraint.new
+end
