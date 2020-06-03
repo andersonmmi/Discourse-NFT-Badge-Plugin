@@ -35,12 +35,12 @@ Run `bundle install` to install missing gems.
 To resolve an error like that, run:
 
 ```
+d/shutdown_dev
+d/boot_dev -p
 d/shell
 cd src
 bundle install
 exit
-d/shutdown_dev
-d/boot_dev -p
 d/unicorn -x
 ```
 
