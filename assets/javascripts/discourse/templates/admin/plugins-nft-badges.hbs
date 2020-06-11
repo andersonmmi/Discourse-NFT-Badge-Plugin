@@ -5,5 +5,12 @@
 {{/if}}
 
 <div class='buttons'>
-    {{d-button label="web3_address.show" action="showWeb3Address" icon="far-eye"}}
+    {{d-button label="nft_badges.show" action="showWeb3Address" icon="far-eye"}}
+</div>
+
+<div>
+    <strong>{{nft_badges.contracts}}</strong>
+
+    {{input type="text" label="nft_badges.add_contract_input"}}
+    {{d-button label="nft_badges.add_contract" action="" icon=""}}
 </div>
