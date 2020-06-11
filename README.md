@@ -9,6 +9,8 @@ https://meta.discourse.org/t/grant-a-badge-to-individual-users-manually/29426
 
 ## Discourse development server setup:
 
+Development server IP: 64.225.118.64
+
 [Beginners guild to install Discourse for Development Using Docker](https://meta.discourse.org/t/beginners-guide-to-install-discourse-for-development-using-docker/102009)
 
 NOTE: Getting the development server running can require a fair amount of fiddling.  Once running it will be accessible via IP on port 9292.
