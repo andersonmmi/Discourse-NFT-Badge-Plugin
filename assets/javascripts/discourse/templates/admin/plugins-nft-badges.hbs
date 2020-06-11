@@ -1,0 +1,18 @@
+{{#if web3AddressVisible}}
+    <div class='web3Address'>
+        <img src="https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_120,w_120,f_auto,b_white,q_auto:eco/oylb96vwg8mcrg9fp5vd">
+    </div>
+{{/if}}
+
+<div class='buttons'>
+    {{d-button label="nft_badges.show" action="showWeb3Address" icon="far-eye"}}
+</div>
+
+<div>
+    <h2>{{i18n "nft_badges.contracts"}}</h2>
+
+    {{! TODO: Show Ethereum addresses of NFT contracts that have already been saved }}
+
+    {{input type="text" placeholder=(i18n "nft_badges.add_contract_input")}}
+    {{d-button label="nft_badges.add_contract_button" action="addContract" icon=""}}
+</div>
