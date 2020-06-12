@@ -71,7 +71,7 @@ Requires:
 - digitalocean.com account
 - A domain or sub-domain name.
 
-Creat new Digital Ocean droplet.
+Create new Digital Ocean droplet.
 
 Enable firewall on droplet through digital ocean.  Open ports 80 and 443 to incoming traffic.
 
