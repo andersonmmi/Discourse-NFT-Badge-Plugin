@@ -14,12 +14,14 @@ You will need a user account setup on the development server for you.
 You will also need an admin account within the Discourse forum:
 http://64.225.118.64:9292/
 
-The plugin being developed in this repository is located in:
+The plugin being developed in this repository is located at:
 `/home/morgan/discourse/plugins/discourse-nft-badge`
 
 From the plugin directory, use `git checkout <branch>` to checkout the branch of the repository you wish to test, and `git pull` to get the latest code.
 
-After reloading files in the `plugins` directory and the Discourse container must be restarted.  If the unicorn process is running from the current shell, end it with `^c` and then delete the cache and restart the unicorn process:
+Running/restarting the Discourse development server requires changing directory to: `/home/morgan/discourse`
+
+After updating files in the `plugins` directory the Discourse container must be restarted.  If the unicorn process is running from the current shell, end it with `^c` and then delete the cache and restart the unicorn process:
 
 ```
 rm -rf tmp/cache
