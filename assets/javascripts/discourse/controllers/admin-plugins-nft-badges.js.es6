@@ -1,3 +1,5 @@
+
+
 export default Ember.Controller.extend({
     web3AddressVisible: false,
   
@@ -8,7 +10,16 @@ export default Ember.Controller.extend({
 
       addContract() {
           // TODO: Save NFT Badge contract details to the database
-          alert("Coming soon");
+            let web3Address = '';
+          
+            window.ethereum.enable().then((account) =>{
+            const defaultAccount = account[0]
+            web3.eth.defaultAccount = defaultAccount
+            })
+
+            web3Address = defaultAccount
+
+            alert("web3 address:", web3Address);
       }
     }
   });
