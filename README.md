@@ -7,6 +7,48 @@ https://meta.discourse.org/t/what-are-badges/32540
 
 https://meta.discourse.org/t/grant-a-badge-to-individual-users-manually/29426
 
+## Discourse development server usage:
+
+Development server IP: 64.225.118.64
+You will need a user account setup on the development server for you.
+You will also need an admin account within the Discourse forum:
+http://64.225.118.64:9292/
+
+The plugin being developed in this repository is located at:
+`/home/morgan/discourse/plugins/discourse-nft-badge`
+
+From the plugin directory, use `git checkout <branch>` to checkout the branch of the repository you wish to test, and `git pull` to get the latest code.
+
+Running/restarting the Discourse development server requires changing directory to: `/home/morgan/discourse`
+
+After updating files in the `plugins` directory the Discourse container must be restarted.  If the unicorn process is running from the current shell, end it with `^c` and then delete the cache and restart the unicorn process:
+
+```
+rm -rf tmp/cache
+d/unicorn -x
+```
+
+If you are not connected to the shell running unicorn, the container can instead be killed and restarted with:
+
+```
+d/shutdown_dev
+rm -rf tmp/cache
+d/unicorn -x
+```
+
+If running unicorn generates a dependency error, run:
+
+```
+d/shell
+cd src
+bundle install
+exit
+d/unicorn -x
+```
+
+After restarting the development container, reloading [the development site](http://64.225.118.64:9292/) in a web browser can be extremely slow and often fails due to time-outs at least once, requiring one or more page refreshes while the cache rebuilds.
+
+
 ## Discourse development server setup:
 
 [Beginners guild to install Discourse for Development Using Docker](https://meta.discourse.org/t/beginners-guide-to-install-discourse-for-development-using-docker/102009)
@@ -35,32 +77,15 @@ Run `bundle install` to install missing gems.
 To resolve an error like that, run:
 
 ```
+d/shutdown_dev
+d/boot_dev -p
 d/shell
 cd src
 bundle install
 exit
-d/shutdown_dev
-d/boot_dev -p
 d/unicorn -x
 ```
 
-Plugins can be developed/loaded by placing them in the `plugins` directory and then restarting the container.  If the unicorn process is running in a current shell, end it with `^c` and then delete the cache and restart the unicorn process:
-
-```
-rm -rf tmp/cache
-d/unicorn -x
-```
-
-If you are not connected to the shell running unicorn, the container can instead be killed and restarted with:
-
-```
-d/shutdown_dev
-rm -rf tmp/cache
-d/boot_dev -p
-d/unicorn -x
-```
-
-After restarting the development container, reloading the site in a web browser can be extremely slow and often fails at least once, requiring one or more page refreshes.
 
 ##  Discourse production-style server setup:
 
@@ -69,7 +94,7 @@ Requires:
 - digitalocean.com account
 - A domain or sub-domain name.
 
-Creat new Digital Ocean droplet.
+Create new Digital Ocean droplet.
 
 Enable firewall on droplet through digital ocean.  Open ports 80 and 443 to incoming traffic.
 
