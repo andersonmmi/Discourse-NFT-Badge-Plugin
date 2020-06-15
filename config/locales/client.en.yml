@@ -3,6 +3,9 @@ en:
     nft_badges:
       title: "Web3 Address"
       show: "Show Web3 Address"
+      contracts: "NFT Badge Contracts"
+      add_contract_button: "Add NFT Badge Contract"
+      add_contract_input: "contract address"
     purple_tentacle:
       title: "Purple Tentacle"
       show: "Show Purple Tentacle"
