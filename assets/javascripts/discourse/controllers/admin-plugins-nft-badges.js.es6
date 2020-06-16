@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
 
             window.ethereum.enable();
 
-            alert("web3 address:", web3Address);
+            alert("web3 address:" + web3Address);
       }
     }
   });
