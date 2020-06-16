@@ -157,6 +157,20 @@ After editing app.yml, rebuild the container (the forum will go down, rebuild ta
 `./launcher rebuild app`
 
 
+## Integrating the plugin with Metamask 
+
+We will need to figure out the flow to allow a user to use their metamask accounts to link their addresses for badge redemption later. The current strategy is to leverage PluginStore for the list of addresses and otehr metadata, and then utilize user_custom_fields for the number of addresess they own.
+
+Helpful Resources:
+
+[Github REPO for Ethereum Plugin for Discourse](https://github.com/santiment/discourse-ethereum)
+
+A plugin for integrating with your wallet via web 3, storing the address in user_custom_fields, and leverage some ethereum ruby gems to help send transcations through discourse!
+
+[stackexchange link on verifying metamask account holder](https://ethereum.stackexchange.com/questions/35486/how-to-verify-metamask-account-holder-is-the-real-owner-of-the-address)
+
+Seems useful for understanding the web 3 interactions with proving ownership of a metamask wallet. They mention generating a random nonce, then signing that nonce and return a JWT token.
+
 ## Different Discourse repositories:
 
 ### discourse/discourse.git
