@@ -171,6 +171,47 @@ A plugin for integrating with your wallet via web 3, storing the address in user
 
 Seems useful for understanding the web 3 interactions with proving ownership of a metamask wallet. They mention generating a random nonce, then signing that nonce and return a JWT token.
 
+## Redeem badge flow
+
+Templates created:
+```
+templateId 0, name: dsrChallange, description: Challenge on DSR, image: dsrChallange.png
+templateId 1, name: 3 months dsr locked, description: Locked in DSR for 3 months, image: https://image.com
+templateId 2, name: Random2, description: Random Challange n. 2, image: random2.png
+templateId 3, name: daiChallenge, description: Sent 10 Dai, image: daiChallenge.png
+templateId 4, name: Random4, description: Random Challenge n. 4, image: random4.png
+templateId 5, name: Random5, description: Random Challange n. 5, image: random5.png
+templateId 6, name: Random6, description: Random Challange n. 6, image: random6.png
+templateId 7, name: govChallenge, description: Vote on Governance Poll, image: govChallenge
+```
+
+Maker contract [here](https://kovan.etherscan.io/address/0x14D0DBd853923b856c000E4070631e4828E99DaE):
+```
+const addresses = {
+  badgeFactory: {
+    kovan: "0x14D0DBd853923b856c000E4070631e4828E99DaE",
+    mainnet: ""
+  },
+
+```
+Function to activate the badge:
+```
+  /// @notice Activate Badge by redeemers
+  /// @dev Verify if the caller is a redeemer
+  /// @param proof Merkle Proof
+  /// @param templateId Template Id
+  /// @param tokenURI Token URI
+  /// @return _tokenId Token Id of the new Badge
+  function activateBadge(bytes32[] memory proof, uint256 templateId, string memory tokenURI) public whenNotPaused returns (bool) {
+    require(templates.length > templateId, "No template with that id");
+    require(insignia.verify(templateId, msg.sender) || proof.verify(insignia.roots(templateId), keccak256(abi.encodePacked(msg.sender))), "Caller is not a redeemer");
+
+```
+
+Additional resources:
+[Maker Badges Repo](https://github.com/naszam/maker-badges)
+[Maker Certificates Repo](https://github.com/scottrepreneur/Certificates/tree/maker/Maker)
+
 ## Different Discourse repositories:
 
 ### discourse/discourse.git
