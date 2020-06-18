@@ -216,11 +216,6 @@ Additional resources:
 
 It looks like we can use "plugin outlets" to enable modifying the UI of the app when the plugin is added. Heres some documentation on how to get that added for us:
 
-Resources:
-[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302) for reference.
-[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)
-[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)
-
 Steps:
 
 1 - Decide where in the UI we want adding addresses to surface - find the approximate template in the discourse source
@@ -263,14 +258,14 @@ Lets assume we decided to use "user-custom-controls". First, lets create a new t
 The key is to add this file to the below directory in the plugins repo. Note that the relative path is very similar to where the templates are in discourse, except these connector templates are placed in the /connectors/{name of plugin outlet}.
 
 ```
-  plugin.rb			// main plugin file
+  plugin.rb			                     // main plugin file
   /assets
     /javascripts
       /discourse
         /templates
           /connectors
-            /user-custom-controls 	// same name as the plugin-outlet
-              hello.hbs	// inserted into site links
+            /user-custom-controls 	 // same name as the plugin-outlet
+              hello.hbs	             // inserted into site links
 
 ```
 
@@ -279,6 +274,15 @@ Finally, register the asset in plugin.rb if necessary:
 ```
 register_asset "javascripts/discourse/templates/connectors/user-custom-controls/hello.hbs"
 ```
+
+And that should be good!
+
+Resources:
+
+[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302)
+[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)
+[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)
+
 
 ## Different Discourse repositories:
 
