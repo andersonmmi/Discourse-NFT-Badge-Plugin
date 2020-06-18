@@ -238,9 +238,9 @@ discourse path="discourse/app/assets/javascripts/discourse/app/templates/prefere
 
 2 - Find the closest available plugin outlet
 
-Inside these templates will have predefined lodations where we can hook our plugin into. These are called plugin outlets and have the following convention:
+Inside these templates will have predefined locations where we can hook our plugin into. These are called plugin outlets, are located inside the handlebar templates, and have the following conventions :
 ```
-"plugin-outlet name="blah" 
+{{plugin-outlet name="blah" }}
 ```
 For instance, option 3 above has the following outlets available to us:
 ```
