@@ -208,9 +208,9 @@ Function to activate the badge:
 
 ```
 
-Additional resources:
-[Maker Badges Repo](https://github.com/naszam/maker-badges)
-[Maker Certificates Repo](https://github.com/scottrepreneur/Certificates/tree/maker/Maker)
+Additional resources:<br/>
+[Maker Badges Repo](https://github.com/naszam/maker-badges)<br/>
+[Maker Certificates Repo](https://github.com/scottrepreneur/Certificates/tree/maker/Maker)<br/>
 
 ## Utilizing Discourse Plugin outlets to customize UI on discourse
 
@@ -221,19 +221,20 @@ Steps:
 1 - Decide where in the UI we want adding addresses to surface - find the approximate template in the discourse source
 [Link to Templates folder in discord git](https://github.com/discourse/discourse/tree/7a2e8d3ead63c7d99e1069fc7823e933f931ba85/app/assets/javascripts/discourse/app/templates)
 
-option 1 - drop down under user
-link - https://imgur.com/a/taPbWIr
-[Source](https://github.com/discourse/discourse/blob/3d54f497db40575c996b4ef4374ccc44ba82f354/app/assets/javascripts/discourse/app/templates/user.hbs#L225) 
+option 1 - drop down under user<br/>
+link - https://imgur.com/a/taPbWIr<br/>
+[Source](https://github.com/discourse/discourse/blob/3d54f497db40575c996b4ef4374ccc44ba82f354/app/assets/javascripts/discourse/app/templates/user.hbs#L225) <br/>
 discourse path = "/app/assets/javascripts/discourse/app/templates/user.hbs"
 
-option 2 - Preferences hamburger stack on left
-Link - https://imgur.com/a/ocLF326
-[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences.hbs)
+option 2 - Preferences hamburger stack on left<br/>
+Link - https://imgur.com/a/ocLF326<br/>
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences.hbs)<br/>
 discouse path = "discourse/app/assets/javascripts/discourse/app/templates/preferences.hbs"
 
-option 3- add a button to the "accounts" section in the preferences stack
-Link - https://imgur.com/a/Zuf6SEu
-[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences/account.hbs)
+option 3- add a button to the "accounts" section in the preferences stack<br/>
+Link - https://imgur.com/a/Zuf6SEu<br/>
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences/account.hbs)<br/>
+discourse path="discourse/app/assets/javascripts/discourse/app/templates/preferences/account.hbs". 
 
 2 - Find the closest available plugin outlet
 
@@ -279,9 +280,9 @@ And that should be good!
 
 Resources:
 
-[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302)
-[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)
-[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)
+[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302)<br/>
+[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)<br/>
+[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)<br/>
 
 
 ## Different Discourse repositories:
