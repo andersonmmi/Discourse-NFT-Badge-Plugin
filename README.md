@@ -212,6 +212,74 @@ Additional resources:
 [Maker Badges Repo](https://github.com/naszam/maker-badges)
 [Maker Certificates Repo](https://github.com/scottrepreneur/Certificates/tree/maker/Maker)
 
+## Utilizing Discourse Plugin outlets to customize UI on discourse
+
+It looks like we can use "plugin outlets" to enable modifying the UI of the app when the plugin is added. Heres some documentation on how to get that added for us:
+
+Resources:
+[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302) for reference.
+[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)
+[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)
+
+Steps:
+
+1 - Decide where in the UI we want adding addresses to surface - find the approximate template in the discourse source
+[Link to Templates folder in discord git](https://github.com/discourse/discourse/tree/7a2e8d3ead63c7d99e1069fc7823e933f931ba85/app/assets/javascripts/discourse/app/templates)
+
+option 1 - drop down under user
+link - https://imgur.com/a/taPbWIr
+[Source](https://github.com/discourse/discourse/blob/3d54f497db40575c996b4ef4374ccc44ba82f354/app/assets/javascripts/discourse/app/templates/user.hbs#L225) 
+discourse path = "/app/assets/javascripts/discourse/app/templates/user.hbs"
+
+option 2 - Preferences hamburger stack on left
+Link - https://imgur.com/a/ocLF326
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences.hbs)
+discouse path = "discourse/app/assets/javascripts/discourse/app/templates/preferences.hbs"
+
+option 3- add a button to the "accounts" section in the preferences stack
+Link - https://imgur.com/a/Zuf6SEu
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences/account.hbs)
+
+2 - Find the closest available plugin outlet
+
+Inside these templates will have predefined lodations where we can hook our plugin into. These are called plugin outlets and have the following convention:
+```
+"plugin-outlet name="blah" 
+```
+For instance, option 3 above has the following outlets available to us:
+```
+{{plugin-outlet name="user-preferences-account" args=(hash model=model save=(action "save"))}}
+{{plugin-outlet name="user-custom-controls" args=(hash model=model)}}
+```
+
+3 - Create a handlebars template to connect into the plugin outlet
+
+Lets assume we decided to use "user-custom-controls". First, lets create a new template to inject into the outlet, call it hello.hbs
+
+```
+<b>Hello World</b>
+```
+
+The key is to add this file to the below directory in the plugins repo. Note that the relative path is very similar to where the templates are in discourse, except these connector templates are placed in the /connectors/{name of plugin outlet}.
+
+```
+  plugin.rb			// main plugin file
+  /assets
+    /javascripts
+      /discourse
+        /templates
+          /connectors
+            /user-custom-controls 	// same name as the plugin-outlet
+              hello.hbs	// inserted into site links
+
+```
+
+Finally, register the asset in plugin.rb if necessary:
+
+```
+register_asset "javascripts/discourse/templates/connectors/user-custom-controls/hello.hbs"
+```
+
 ## Different Discourse repositories:
 
 ### discourse/discourse.git
