@@ -10,6 +10,8 @@ register_asset 'stylesheets/common/discourse-nft-badge.scss'
 register_asset 'stylesheets/desktop/discourse-nft-badge.scss', :desktop
 register_asset 'stylesheets/mobile/discourse-nft-badge.scss', :mobile
 
+register_asset "javascripts/discourse/templates/connectors/user-custom-controls/link-wallet-button.hbs"
+
 enabled_site_setting :discourse_nft_badge_enabled
 
 PLUGIN_NAME ||= 'DiscourseNftBadge'
