@@ -171,6 +171,120 @@ A plugin for integrating with your wallet via web 3, storing the address in user
 
 Seems useful for understanding the web 3 interactions with proving ownership of a metamask wallet. They mention generating a random nonce, then signing that nonce and return a JWT token.
 
+## Redeem badge flow
+
+Templates created:
+```
+templateId 0, name: dsrChallange, description: Challenge on DSR, image: dsrChallange.png
+templateId 1, name: 3 months dsr locked, description: Locked in DSR for 3 months, image: https://image.com
+templateId 2, name: Random2, description: Random Challange n. 2, image: random2.png
+templateId 3, name: daiChallenge, description: Sent 10 Dai, image: daiChallenge.png
+templateId 4, name: Random4, description: Random Challenge n. 4, image: random4.png
+templateId 5, name: Random5, description: Random Challange n. 5, image: random5.png
+templateId 6, name: Random6, description: Random Challange n. 6, image: random6.png
+templateId 7, name: govChallenge, description: Vote on Governance Poll, image: govChallenge
+```
+
+Maker contract [here](https://kovan.etherscan.io/address/0x14D0DBd853923b856c000E4070631e4828E99DaE):
+```
+const addresses = {
+  badgeFactory: {
+    kovan: "0x14D0DBd853923b856c000E4070631e4828E99DaE",
+    mainnet: ""
+  },
+
+```
+Function to activate the badge:
+```
+  /// @notice Activate Badge by redeemers
+  /// @dev Verify if the caller is a redeemer
+  /// @param proof Merkle Proof
+  /// @param templateId Template Id
+  /// @param tokenURI Token URI
+  /// @return _tokenId Token Id of the new Badge
+  function activateBadge(bytes32[] memory proof, uint256 templateId, string memory tokenURI) public whenNotPaused returns (bool) {
+    require(templates.length > templateId, "No template with that id");
+    require(insignia.verify(templateId, msg.sender) || proof.verify(insignia.roots(templateId), keccak256(abi.encodePacked(msg.sender))), "Caller is not a redeemer");
+
+```
+
+Additional resources:<br/>
+[Maker Badges Repo](https://github.com/naszam/maker-badges)<br/>
+[Maker Certificates Repo](https://github.com/scottrepreneur/Certificates/tree/maker/Maker)<br/>
+
+## Utilizing Discourse Plugin outlets to customize UI on discourse
+
+It looks like we can use "plugin outlets" to enable modifying the UI of the app when the plugin is added. Heres some documentation on how to get that added for us:
+
+Steps:
+
+1 - Decide where in the UI we want adding addresses to surface - find the approximate template in the discourse source
+[Link to Templates folder in discord git](https://github.com/discourse/discourse/tree/7a2e8d3ead63c7d99e1069fc7823e933f931ba85/app/assets/javascripts/discourse/app/templates)
+
+option 1 - drop down under user<br/>
+link - https://imgur.com/a/taPbWIr<br/>
+[Source](https://github.com/discourse/discourse/blob/3d54f497db40575c996b4ef4374ccc44ba82f354/app/assets/javascripts/discourse/app/templates/user.hbs#L225) <br/>
+discourse path = "/app/assets/javascripts/discourse/app/templates/user.hbs"
+
+option 2 - Preferences hamburger stack on left<br/>
+Link - https://imgur.com/a/ocLF326<br/>
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences.hbs)<br/>
+discouse path = "discourse/app/assets/javascripts/discourse/app/templates/preferences.hbs"
+
+option 3- add a button to the "accounts" section in the preferences stack<br/>
+Link - https://imgur.com/a/Zuf6SEu<br/>
+[Source](https://github.com/discourse/discourse/blob/5bfe1ee4f1a2ae8a4188327b097a38c7f4ca0424/app/assets/javascripts/discourse/app/templates/preferences/account.hbs)<br/>
+discourse path="discourse/app/assets/javascripts/discourse/app/templates/preferences/account.hbs". 
+
+2 - Find the closest available plugin outlet
+
+Inside these templates will have predefined locations where we can hook our plugin into. These are called plugin outlets, are located inside the handlebar templates, and have the following conventions :
+```
+{{plugin-outlet name="blah" }}
+```
+For instance, option 3 above has the following outlets available to us:
+```
+{{plugin-outlet name="user-preferences-account" args=(hash model=model save=(action "save"))}}
+{{plugin-outlet name="user-custom-controls" args=(hash model=model)}}
+```
+
+3 - Create a handlebars template to connect into the plugin outlet
+
+Lets assume we decided to use "user-custom-controls". First, lets create a new template to inject into the outlet, call it hello.hbs
+
+```
+<b>Hello World</b>
+```
+
+The key is to add this file to the below directory in the plugins repo. Note that the relative path is very similar to where the templates are in discourse, except these connector templates are placed in the /connectors/{name of plugin outlet}.
+
+```
+  plugin.rb			                     // main plugin file
+  /assets
+    /javascripts
+      /discourse
+        /templates
+          /connectors
+            /user-custom-controls 	 // same name as the plugin-outlet
+              hello.hbs	             // inserted into site links
+
+```
+
+Finally, register the asset in plugin.rb if necessary:
+
+```
+register_asset "javascripts/discourse/templates/connectors/user-custom-controls/hello.hbs"
+```
+
+And that should be good!
+
+Resources:
+
+[Simple discourse plugin](https://www.sitepoint.com/community/t/a-simple-discourse-plugin/116302)<br/>
+[introduction to plugin outlets](https://meta.discourse.org/t/beginners-guide-to-creating-discourse-plugins-part-2-plugin-outlets/31001)<br/>
+[sample plugin utilizing outlets to add a button](https://meta.discourse.org/t/add-a-button-at-the-bottom-of-a-topic-visible-to-a-specific-group-discourse-topic-group-button/36216)<br/>
+
+
 ## Different Discourse repositories:
 
 ### discourse/discourse.git
