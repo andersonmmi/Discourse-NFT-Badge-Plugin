@@ -49,7 +49,7 @@ d/unicorn -x
 After restarting the development container, reloading [the development site](http://64.225.118.64:9292/) in a web browser can be extremely slow and often fails due to time-outs at least once, requiring one or more page refreshes while the cache rebuilds.
 
 
-## Discourse development server setup:
+## Discourse development server setup (Basic, using an existing server):
 
 [Beginners guild to install Discourse for Development Using Docker](https://meta.discourse.org/t/beginners-guide-to-install-discourse-for-development-using-docker/102009)
 
@@ -85,6 +85,124 @@ bundle install
 exit
 d/unicorn -x
 ```
+
+To create additional Discourse users, from the 'discourse' directory run:
+```
+d/shell
+cd src
+rake admin:create
+### Fill in account details as prompted
+exit
+```
+
+## Discourse development server setup (Complete Digital Ocean Ubuntu process):
+
+
+- Deploy a Digital Ocean droplet running Ubuntu 18.04.
+- Assign own SSH key for root access to server
+- SSH in to NEW server as root:
+
+Add primary user
+```
+adduser <USER>
+usermod -aG sudo <USER>
+```
+
+Become primary user
+```
+su - <USER>
+mkdir .ssh
+```
+
+To allow user to SSH into server, save their SSH public key into .ssh/authorized_keys using a text editor such as vim:
+```
+vim .ssh/authorized_keys
+i <SSH_PUBLIC_KEY>
+:wq
+```
+
+Install Docker, per https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+```
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce
+```
+
+Add primary user to docker group
+```
+sudo usermod -aG docker ${USER}
+su - ${USER}
+```
+
+Install Discourse development version, per https://github.com/andersonmmi/Discourse-NFT-Badge-Plugin#discourse-development-server-setup
+```
+git clone https://github.com/discourse/discourse.git
+cd discourse
+d/boot_dev --init
+```
+
+Create initial admin user as prompted, continue initialization:
+```
+d/shutdown_dev
+d/boot_dev -p
+d/unicorn -x
+```
+
+If there's a depencendy error when running "d/unicorn -x", resolve it with:
+```
+d/shell
+cd src
+bundle install
+exit
+d/unicorn -x
+```
+
+
+Install Discourse plugins
+- If the unicorn daemon is running in the current process, exit it with: ^c
+```
+cd plugins
+git clone https://github.com/andersonmmi/Discourse-NFT-Badge-Plugin.git
+git clone https://github.com/morganstar/discourse-ethereum.git
+git clone https://github.com/discourse/discourse-user-notes.git
+git clone https://github.com/discourse/discourse-data-explorer.git
+cd ..
+d/unicorn -x
+```
+
+Access the site in a browser at it's IP address on port 9292; page load will probably time out and need to be repeated to build cache
+
+
+If the unicorn daemon crashes with "out of memory" errors it may be necessary to enable swap space, per https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
+
+Check if swap space is enabled:
+```
+sudo swapon --show
+```
+
+If that command has no result, swap isn't enabled, do this to enable it:
+```
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+Relaunch the unicorn daemon again:
+```
+d/unicorn -x
+```
+
+
+
+
+
+
 
 
 ##  Discourse production-style server setup:
