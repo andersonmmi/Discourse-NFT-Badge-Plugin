@@ -1,5 +1,3 @@
-
-
 export default Ember.Controller.extend({
     web3AddressVisible: false,
   
