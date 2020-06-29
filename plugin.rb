@@ -20,6 +20,37 @@ load File.expand_path('lib/discourse-nft-badge/engine.rb', __dir__)
 
 after_initialize do
   # https://github.com/discourse/discourse/blob/master/lib/plugin/instance.rb
+
+  # @Aaron: Attempting to store date-time of today()
+  def self.key_for(user_id)
+    "notes:#{user_id}"
+  end
+
+  def self.notes_for(user_id)
+    PluginStore.get('user_notes', key_for(user_id)) || []
+  end
+  
+  def self.add_note(user, raw, created_by, opts = nil)
+    opts ||= {}
+
+    notes = notes_for(user.id)
+    record = {
+      id: SecureRandom.hex(16),
+      user_id: user.id,
+      raw: raw,
+      created_by: created_by,
+      created_at: Time.now
+    }.merge(opts)
+
+    notes << record
+    ::PluginStore.set("user_notes", key_for(user.id), notes)
+
+    user.custom_fields[COUNT_FIELD] = notes.size
+    user.save_custom_fields
+
+    record
+  end
+
 end
 
 # PluginStoreRow, UserCustomField, and UserBadge are all classes which inherit from ActiveRecord
