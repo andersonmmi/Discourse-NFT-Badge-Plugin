@@ -3,7 +3,7 @@ export default {
       clickButton() {
         // self.add_note(1, "test", "ME");
         // alert("button clicked");
-        window.web3.currentProvider.sendAsync(  {
+        window.ethereum.sendAsync(  {
           method: 'personal_sign',
           params: [
               'I control my private key.', window.ethereum.selectedAddress
@@ -17,7 +17,7 @@ export default {
             console.error("error:", error);
           } else {
             // TODO: send signed message to backend and recover public key in the backend
-            window.web3.currentProvider.sendAsync(  {
+            window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
               params: [
                   'I control my private key.', response.result
