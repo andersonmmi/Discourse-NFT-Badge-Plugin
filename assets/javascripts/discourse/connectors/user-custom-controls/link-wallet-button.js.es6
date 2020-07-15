@@ -16,6 +16,7 @@ export default {
             // Handle error. Likely the user rejected the login
             console.error("error:", error);
           } else {
+            // TODO: send signed message to backend and recover public key in the backend
             window.web3.currentProvider.sendAsync(  {
               method: 'personal_ecRecover',
               params: [
