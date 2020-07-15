@@ -1,8 +1,6 @@
 export default {
     actions: {
       clickButton() {
-        // self.add_note(1, "test", "ME");
-        // alert("button clicked");
         window.ethereum.sendAsync(  {
           method: 'personal_sign',
           params: [
@@ -14,7 +12,7 @@ export default {
         (error, response) => {
           if (error) {
             // Handle error. Likely the user rejected the login
-            console.error("error:", error);
+            console.error("error with signing message:", error);
           } else {
             // TODO: send signed message to backend and recover public key in the backend
             window.ethereum.sendAsync(  {
@@ -27,8 +25,7 @@ export default {
             },
             (error, response) => {
               if (error) {
-                // Handle error. Likely the user rejected the login
-                console.error("error:", error);
+                console.error("error with recovering address:", error);
               } else {
                 console.log(response.result);
               }
