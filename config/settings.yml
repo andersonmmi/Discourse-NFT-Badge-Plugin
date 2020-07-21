@@ -2,3 +2,5 @@ plugins:
   discourse_nft_badge_enabled:
     default: true
     client: true
+    # @Aaron: will a test_address render to the text-field?
+    test_address: "abc123"
