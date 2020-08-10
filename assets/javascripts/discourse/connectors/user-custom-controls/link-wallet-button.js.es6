@@ -1,5 +1,5 @@
 // use regex in a function to populate username into message params
-getUsername = () => {
+const getUsername = () => {
   const regex = /\/u\/([a-zA-Z0-9_-]*)\//gm;
   const str = window.location.toString;
   let m;
@@ -43,7 +43,7 @@ export default {
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
               params: [
-                  'I control my private key.', response.result
+                `${username}`, response.result
                       ],
               from: window.ethereum.selectedAddress
           
