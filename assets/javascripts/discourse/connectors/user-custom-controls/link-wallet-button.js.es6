@@ -11,13 +11,15 @@ export default {
           let m;
           let username;
 
-          console.log("getUsername fired!")
+          console.log("getUsername fired!", str)
         
           while ((m = regex.exec(str)) !== null) {
               // This is necessary to avoid infinite loops with zero-width matches
               if (m.index === regex.lastIndex) {
                   regex.lastIndex++;
               }
+
+              console.log("m", m)
               
               // The result can be accessed through the `m`-variable.
               m.forEach((match, groupIndex) => {
