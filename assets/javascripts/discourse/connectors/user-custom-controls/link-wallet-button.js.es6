@@ -20,13 +20,7 @@ export default {
               }
 
               console.log("m[1]", m[1])
-              
-              // The result can be accessed through the `m`-variable.
-              m.forEach((match, groupIndex) => {
-                  // log regex match output
-                  console.log(`Found match, group ${groupIndex}: ${match}`);
-                  username = `${groupIndex}`
-              });
+              username = m[1]
           }
         // call getUsername here
         // getUsername();
