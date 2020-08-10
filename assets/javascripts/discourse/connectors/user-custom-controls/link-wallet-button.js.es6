@@ -1,28 +1,31 @@
-// use regex in a function to populate username into message params
-const getUsername = () => {
-  const regex = /\/u\/([a-zA-Z0-9_-]*)\//gm;
-  const str = window.location.toString;
-  let m;
-
-  while ((m = regex.exec(str)) !== null) {
-      // This is necessary to avoid infinite loops with zero-width matches
-      if (m.index === regex.lastIndex) {
-          regex.lastIndex++;
-      }
-      
-      // The result can be accessed through the `m`-variable.
-      m.forEach((match, groupIndex) => {
-          // log regex match output
-          console.log(`Found match, group ${groupIndex}: ${match}`);
-      });
-  }
-};
+// Current Focus: use regex in a function to populate username into message params
 
 export default {
     actions: {
       clickButton() {
-        // call getUsername here?
-        getUsername()
+        // define getUsername here?
+        getUsername = () => {
+          const regex = /\/u\/([a-zA-Z0-9_-]*)\//gm;
+          const str = window.location.toString;
+          let m;
+        
+          while ((m = regex.exec(str)) !== null) {
+              // This is necessary to avoid infinite loops with zero-width matches
+              if (m.index === regex.lastIndex) {
+                  regex.lastIndex++;
+              }
+              
+              // The result can be accessed through the `m`-variable.
+              m.forEach((match, groupIndex) => {
+                  // log regex match output
+                  console.log(`Found match, group ${groupIndex}: ${match}`);
+              });
+          }
+        };
+
+        // call getUsername here
+        getUsername();
+
         // :alembic: message params should be username & ethAddress
         window.ethereum.sendAsync(  {
           method: 'personal_sign',
