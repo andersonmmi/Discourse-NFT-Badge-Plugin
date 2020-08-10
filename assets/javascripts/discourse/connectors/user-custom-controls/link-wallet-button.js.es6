@@ -22,7 +22,7 @@ export default {
     actions: {
       clickButton() {
         // call getUsername here?
-        const username = getUsername()
+        getUsername()
         // :alembic: message params should be username & ethAddress
         window.ethereum.sendAsync(  {
           method: 'personal_sign',
