@@ -39,7 +39,7 @@ export default {
             // Q: What does the response look like?
             console.log(response);
             // A: It looks like an `0x` prefixed hash
-            // TODO: send signed message to backend and recover public key in the backend
+            // :alembic: username is undefined, but address is recoverable
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
               params: [
