@@ -12,7 +12,8 @@ const getUsername = () => {
       
       // The result can be accessed through the `m`-variable.
       m.forEach((match, groupIndex) => {
-          return(`Found match, group ${groupIndex}: ${match}`);
+          // log regex match output
+          console.log(`Found match, group ${groupIndex}: ${match}`);
       });
   }
 };
