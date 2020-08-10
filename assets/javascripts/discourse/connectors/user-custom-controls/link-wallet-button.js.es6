@@ -40,9 +40,9 @@ export default {
             // Handle error. Likely the user rejected the login
             console.error("error with signing message:", error);
           } else {
-            // Q: What does the response look like?
-            console.log(response);
-            // A: It looks like an `0x` prefixed hash
+            // Q: What does the message look like?
+            console.log("ajax message:", username, window.ethereum.selectedAddress, response.result);
+            // A: pending...
             // :alembic: username is undefined, but address is recoverable
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
