@@ -19,7 +19,7 @@ export default {
                   regex.lastIndex++;
               }
 
-              console.log("m", m)
+              console.log("m[1]", m[1])
               
               // The result can be accessed through the `m`-variable.
               m.forEach((match, groupIndex) => {
