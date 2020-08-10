@@ -1,13 +1,17 @@
 // Current Focus: use regex in a function to populate username into message params
 
 export default {
-    actions: {
+  actions: {
+      
       clickButton() {
-        // define getUsername here?
-        getUsername = () => {
+          // get username here without defining getUsername()?
+        
           const regex = /\/u\/([a-zA-Z0-9_-]*)\//gm;
           const str = window.location.toString;
           let m;
+          let username;
+
+          console.log("getUsername fired!")
         
           while ((m = regex.exec(str)) !== null) {
               // This is necessary to avoid infinite loops with zero-width matches
@@ -19,12 +23,12 @@ export default {
               m.forEach((match, groupIndex) => {
                   // log regex match output
                   console.log(`Found match, group ${groupIndex}: ${match}`);
+                  username = `${groupIndex}`
               });
           }
-        };
-
         // call getUsername here
-        getUsername();
+        // getUsername();
+        console.log("username", username)
 
         // :alembic: message params should be username & ethAddress
         window.ethereum.sendAsync(  {
