@@ -41,7 +41,11 @@ export default {
             console.error("error with signing message:", error);
           } else {
             // Q: What does the message look like?
-            console.log("ajax message:", username, window.ethereum.selectedAddress, response.result);
+            console.log("ajax message:", {
+              `username: ${username},
+              address: ${window.ethereum.selectedAddress},
+              signature: ${response.result}`
+            });
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
             window.ethereum.sendAsync(  {
