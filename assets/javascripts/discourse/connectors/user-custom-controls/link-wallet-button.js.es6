@@ -14,6 +14,8 @@ export default {
             // Handle error. Likely the user rejected the login
             console.error("error with signing message:", error);
           } else {
+            // What does the response look like?
+            console.log(response);
             // TODO: send signed message to backend and recover public key in the backend
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
