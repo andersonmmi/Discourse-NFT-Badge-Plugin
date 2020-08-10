@@ -1,6 +1,7 @@
 export default {
     actions: {
       clickButton() {
+        // :alembic: message params should be username & ethAddress
         window.ethereum.sendAsync(  {
           method: 'personal_sign',
           params: [
@@ -14,8 +15,9 @@ export default {
             // Handle error. Likely the user rejected the login
             console.error("error with signing message:", error);
           } else {
-            // What does the response look like?
+            // Q: What does the response look like?
             console.log(response);
+            // A: It looks like an `0x` prefixed hash
             // TODO: send signed message to backend and recover public key in the backend
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
