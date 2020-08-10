@@ -7,7 +7,7 @@ export default {
           // get username here without defining getUsername()?
         
           const regex = /\/u\/([a-zA-Z0-9_-]*)\//gm;
-          const str = window.location.toString;
+          const str = window.location.href;
           let m;
           let username;
 
