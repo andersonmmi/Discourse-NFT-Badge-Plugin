@@ -30,7 +30,7 @@ export default {
         window.ethereum.sendAsync(  {
           method: 'personal_sign',
           params: [
-              `test`, window.ethereum.selectedAddress
+              `${username}`, window.ethereum.selectedAddress
                   ],
           from: window.ethereum.selectedAddress
       
@@ -47,7 +47,7 @@ export default {
             window.ethereum.sendAsync(  {
               method: 'personal_ecRecover',
               params: [
-                `test`, response.result
+                `${username}`, response.result
                       ],
               from: window.ethereum.selectedAddress
           
