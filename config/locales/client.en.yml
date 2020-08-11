@@ -8,3 +8,5 @@ en:
       add_contract_input: "contract address"
     wallet_link:
       add_button : "Add wallet address"
+    wallet_connect:
+      add_button: "Connect wallet first"

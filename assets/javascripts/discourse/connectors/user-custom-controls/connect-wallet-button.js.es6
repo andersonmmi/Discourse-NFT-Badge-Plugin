@@ -1,7 +1,7 @@
 export default {
     actions: {
         
-        clickButton() {
+        connectWallet() {
             window.ethereum.enable();
         },
 
