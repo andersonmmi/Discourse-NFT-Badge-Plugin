@@ -66,8 +66,8 @@ export default {
           }
         })
       },
-      // key_for(user_id){
-      //  return `notes:${user_id}`
-      // }
+      connectWallet() {
+        window.ethereum.enable();
+      },
     }
   };
