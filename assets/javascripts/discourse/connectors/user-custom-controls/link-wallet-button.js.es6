@@ -49,14 +49,13 @@ export default {
             console.log("ajax message:", message)
             // @Aaron: pass message to lambda function
             const requestOptions = {
-              method: 'GET',
-              redirect: 'follow'
+              method: 'GET'
             };
             fetch(
               "http://localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18",
               requestOptions
             )
-            .then(res => console.log(res.json()));
+            .then(res => console.log("Fetch Response Yo!", res.json()));
 
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
