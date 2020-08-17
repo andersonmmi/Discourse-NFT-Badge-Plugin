@@ -48,9 +48,16 @@ export default {
             }`
             console.log("ajax message:", message)
             // @Aaron: pass message to lambda function
-            fetch('localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18')
-            .then(response => response.json())
-            .then(console.log("lambda response:", response));
+            const requestOptions = {
+              method: 'GET',
+              redirect: 'follow'
+            };
+            fetch(
+              "localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18",
+              requestOptions
+            )
+            .then(res => res.json())
+            .then(console.log("lambda response:", res));
 
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
