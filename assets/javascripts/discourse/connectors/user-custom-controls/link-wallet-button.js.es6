@@ -52,7 +52,7 @@ export default {
               method: 'GET'
             };
             fetch(
-              "http://localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18",
+              `http://localhost:3000/discourse/${message}`,
               requestOptions
             )
             .then(res => res.json())
