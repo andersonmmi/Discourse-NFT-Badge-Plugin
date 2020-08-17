@@ -56,7 +56,7 @@ export default {
               requestOptions
             )
             .then(res => res.json())
-            .then(resolved => console.log("Fetch Response Too Yo!", resolved)
+            .then(resolved => console.log("Fetch Response Too Yo!", resolved))
 
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
