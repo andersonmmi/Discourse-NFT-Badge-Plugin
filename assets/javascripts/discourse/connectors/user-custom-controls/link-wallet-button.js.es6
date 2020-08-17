@@ -41,11 +41,7 @@ export default {
             console.error("error with signing message:", error);
           } else {
             // Q: What does the message look like?
-            const message = `{
-              username: ${username},
-              address: ${window.ethereum.selectedAddress},
-              signature: ${response.result}
-            }`
+            const message = `{username:${username},address:${window.ethereum.selectedAddress},signature:${response.result}}`
             console.log("ajax message:", message)
             // @Aaron: pass message to lambda function
             const requestOptions = {
@@ -60,21 +56,7 @@ export default {
 
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
-            window.ethereum.sendAsync(  {
-              method: 'personal_ecRecover',
-              params: [
-                `${username}`, response.result
-                      ],
-              from: window.ethereum.selectedAddress
-          
-            },
-            (error, response) => {
-              if (error) {
-                console.error("error with recovering address:", error);
-              } else {
-                console.log(response.result);
-              }
-            });
+
           }
         })
       },
