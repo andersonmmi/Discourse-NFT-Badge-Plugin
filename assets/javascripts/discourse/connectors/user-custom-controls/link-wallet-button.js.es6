@@ -41,11 +41,17 @@ export default {
             console.error("error with signing message:", error);
           } else {
             // Q: What does the message look like?
-            console.log("ajax message:", `{
+            const message = `{
               username: ${username},
               address: ${window.ethereum.selectedAddress},
               signature: ${response.result}
-            }`);
+            }`
+            console.log("ajax message:", message)
+            // @Aaron: pass message to lambda function
+            fetch('localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18')
+            .then(response => response.json())
+            .then(console.log("lambda response:", response));
+
             // A: pending...
             // :alembic: username is undefined, but address is recoverable
             window.ethereum.sendAsync(  {
