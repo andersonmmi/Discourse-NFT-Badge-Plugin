@@ -41,7 +41,7 @@ export default {
             console.error("error with signing message:", error);
           } else {
             // Q: What does the message look like?
-            const message = `{username:${username},address:${window.ethereum.selectedAddress},signature:${response.result}}`
+            const message = `{"username":"${username}","address":"${window.ethereum.selectedAddress}","signature":"${response.result}"}`
             console.log("ajax message:", message)
             // @Aaron: pass message to lambda function
             const requestOptions = {
