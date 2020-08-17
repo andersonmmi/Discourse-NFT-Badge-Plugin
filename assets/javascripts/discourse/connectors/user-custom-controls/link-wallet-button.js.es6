@@ -55,7 +55,7 @@ export default {
               "http://localhost:3000/address/0xe8bF424E047372d249d0826c5567655ba3B72f18",
               requestOptions
             )
-            .then(res => console.log("Fetch Response Yo!", res.json()))
+            .then(res => res.json())
             .then(resolved => console.log("Fetch Response Too Yo!", resolved)
 
             // A: pending...
